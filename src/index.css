@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+  }
+
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Custom momentum scrolling */
+.native-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Hide scrollbars while allowing natural scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 8-segment iOS Spinner Animation Sequence:
+   1. Initial state: 8 lines start close together (translateY: 3.2px towards center), stationary (0deg).
+   2. Convergence: 8 lines smoothly come together into the compact spinner shape (0s - 0.20s).
+   3. Speed transition: immediately after lines meet, spinner accelerates into fast rotation (0.20s - 0.52s).
+   4. Continuous rotation: smoothly settles into normal continuous iOS-style rotation (0.52s+ infinite).
+*/
+.spinner8-spoke {
+  transform: translateY(3.2px);
+  will-change: transform;
+}
+
+@keyframes spinner8-lines-converge {
+  0% {
+    transform: translateY(3.2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.spinner8-lines-group {
+  transform-origin: 12px 12px;
+}
+
+.spinner8-active .spinner8-spoke {
+  animation: spinner8-lines-converge 0.20s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spinner8-intro-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  /* Stationary while the 8 lines converge (0s - 0.20s) */
+  38% {
+    transform: rotate(0deg);
+    animation-timing-function: cubic-bezier(0.12, 0.8, 0.32, 1);
+  }
+  /* Fast rotation immediately after lines meet (0.20s - 0.52s) */
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner8-intro-rotator {
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.spinner8-active .spinner8-intro-rotator {
+  animation: spinner8-intro-spin 0.52s linear 1 forwards;
+}
+
+@keyframes spinner8-continuous {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner8-continuous-rotator {
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.spinner8-active .spinner8-continuous-rotator {
+  animation: spinner8-continuous 0.8s steps(8, end) 0.52s infinite;
+}
+
+/* 8-segment progressive pull illumination */
+.spinner8-segment-0 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.00) * 8), 1); }
+.spinner8-segment-1 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.12) * 8), 1); }
+.spinner8-segment-2 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.24) * 8), 1); }
+.spinner8-segment-3 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.36) * 8), 1); }
+.spinner8-segment-4 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.48) * 8), 1); }
+.spinner8-segment-5 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.60) * 8), 1); }
+.spinner8-segment-6 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.72) * 8), 1); }
+.spinner8-segment-7 { opacity: clamp(0, calc((var(--pull-progress, 0) - 0.84) * 8), 1); }
+
+/* When spinning (loading after release), active trail overrides progressive pull */
+.spinner8-rotating .spinner8-segment-0 { opacity: 1.00 !important; }
+.spinner8-rotating .spinner8-segment-1 { opacity: 0.88 !important; }
+.spinner8-rotating .spinner8-segment-2 { opacity: 0.76 !important; }
+.spinner8-rotating .spinner8-segment-3 { opacity: 0.64 !important; }
+.spinner8-rotating .spinner8-segment-4 { opacity: 0.52 !important; }
+.spinner8-rotating .spinner8-segment-5 { opacity: 0.40 !important; }
+.spinner8-rotating .spinner8-segment-6 { opacity: 0.28 !important; }
+.spinner8-rotating .spinner8-segment-7 { opacity: 0.18 !important; }
+
+@keyframes spin-8 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-8 {
+  animation: spin-8 0.8s steps(8, end) infinite !important;
+  will-change: transform;
+}
+
+/* 7-segment spinner rotation */
+@keyframes spin-7 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-7 {
+  animation: spin-7 0.85s steps(7, end) infinite;
+}

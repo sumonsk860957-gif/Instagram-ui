@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <!-- Instagram-inspired premium multi-stop gradient -->
+    <radialGradient id="ig-radial" cx="20%" cy="110%" r="130%">
+      <stop offset="0%" stop-color="#FFDD55" />
+      <stop offset="15%" stop-color="#FF543E" />
+      <stop offset="50%" stop-color="#C837AB" />
+      <stop offset="100%" stop-color="#3771C8" />
+    </radialGradient>
+    <linearGradient id="ig-linear" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FA8F21" />
+      <stop offset="35%" stop-color="#D82D7E" />
+      <stop offset="70%" stop-color="#9B37A9" />
+      <stop offset="100%" stop-color="#4F5BD5" />
+    </linearGradient>
+    <filter id="subtle-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3" flood-color="#000000" />
+    </filter>
+  </defs>
+
+  <!-- Modern rounded-square app icon background (squircle) -->
+  <rect width="512" height="512" rx="115" ry="115" fill="url(#ig-linear)" />
+  <rect width="512" height="512" rx="115" ry="115" fill="url(#ig-radial)" opacity="0.85" />
+
+  <!-- Instagram Camera Outline Symbol -->
+  <g filter="url(#subtle-shadow)">
+    <!-- Outer camera rounded rectangle -->
+    <rect x="136" y="104" width="240" height="210" rx="55" ry="55" fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Center lens circle -->
+    <circle cx="256" cy="209" r="54" fill="none" stroke="#FFFFFF" stroke-width="22" />
+    
+    <!-- Flash dot -->
+    <circle cx="322" cy="155" r="13" fill="#FFFFFF" />
+  </g>
+
+  <!-- "SUMON" text inside the icon artwork, centered, bold, clean, and crisp -->
+  <text x="256" y="405" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="58" font-weight="900" letter-spacing="7" fill="#FFFFFF" text-anchor="middle" filter="url(#subtle-shadow)">SUMON</text>
+</svg>
